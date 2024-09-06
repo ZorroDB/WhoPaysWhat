@@ -1,37 +1,41 @@
-body{
+body {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    background-color: #f7ce4c;
 }
-a{
+a {
     color: inherit;
     text-decoration: none;
 }
-nav .titlePage{
+nav .titlePage {
     text-align: center;
-    font-size: 40px;
+    letter-spacing: 10px;
+    font-size: 70px;
     margin-top: 20px;
     margin: 20px 0 0 0;
 }
-nav .navBar{
+nav .navBar {
     display: flex;
     justify-content: center;
     gap: 30px;
     list-style-type: none;
     text-decoration: none;
 }
-nav .navBar li{
+nav .navBar li {
     color: inherit;
 }
-.gap{
+.gap {
     height: 100px;
     width: 100%;
 }
-.headText{
+.headText {
     text-align: center;
     width: 70%;
     margin: auto;
 }
-.headText img{
+.headText img {
     margin-bottom: 40px;
 }
