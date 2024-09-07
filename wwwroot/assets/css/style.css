@@ -10,14 +10,13 @@ a {
     color: inherit;
     text-decoration: none;
 }
-nav .titlePage {
+.titlePage {
     text-align: center;
+    margin-left: auto;
     letter-spacing: 10px;
     font-size: 70px;
-    margin-top: 20px;
-    margin: 20px 0 0 0;
 }
-nav .navBar {
+.navBar {
     display: flex;
     justify-content: center;
     gap: 30px;
@@ -26,6 +25,9 @@ nav .navBar {
 }
 nav .navBar li {
     color: inherit;
+}
+.navBar i .loginIcon{
+    vertical-align: baseline;
 }
 .gap {
     height: 100px;
@@ -38,4 +40,35 @@ nav .navBar li {
 }
 .headText img {
     margin-bottom: 40px;
+}
+/* ------------------------------------------ */
+
+.nameQuestion{
+    text-align: center;
+    width: 100%;
+}
+.nameQuestion .uitjeName{
+    border-radius: 50px;
+    width: 25%;
+    height: 40px;
+    background-color: transparent;
+    border: black 2px solid;
+    padding-left: 20px;
+    display: block;
+    margin: auto;
+    font-size: 18px;
+}
+.nameQuestion button{
+    font-size: 20px;
+    margin-top: 20px;
+    background-color: black;
+    color: #f7ce4c;
+    padding: 20px 50px 20px 50px;
+    border-radius: 50px;
+    border: black 2px solid;
+    transition: ease-in-out .4s;
+}
+.nameQuestion button:hover{
+    background-color: transparent;
+    color: black;
 }
