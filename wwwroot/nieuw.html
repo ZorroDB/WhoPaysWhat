@@ -9,10 +9,12 @@
 <body>
     <h1 class="titlePage">DOKKIE</h1>
     <div class="gap"></div>
-    <div class="nameQuestion">
+    <div class="nameQuestion" id="nameQuestion">
         <h2>Wat is de naam van het uitje?</h2>
-        <input name="uitjeName" placeholder="...." class="uitjeName">
-        <button id="planTrip">Plan je trip! 🥳</button>
+        <input name="uitjeName" placeholder="...." class="uitjeName" id="uitjeName">
+        <button id="planTrip" onclick="getTripName()">Plan je trip! 🥳</button>
     </div>
+
+    <script src="../src/index.ts"></script>
 </body>
 </html>

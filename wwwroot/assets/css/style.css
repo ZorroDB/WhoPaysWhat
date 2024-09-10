@@ -26,7 +26,7 @@ a {
 nav .navBar li {
     color: inherit;
 }
-.navBar i .loginIcon{
+.navBar i .loginIcon {
     vertical-align: baseline;
 }
 .gap {
@@ -43,22 +43,23 @@ nav .navBar li {
 }
 /* ------------------------------------------ */
 
-.nameQuestion{
+.nameQuestion {
     text-align: center;
     width: 100%;
 }
-.nameQuestion .uitjeName{
+
+.nameQuestion .uitjeName {
     border-radius: 50px;
     width: 25%;
     height: 40px;
     background-color: transparent;
     border: black 2px solid;
-    padding-left: 20px;
+    padding-left: 20px; 
     display: block;
     margin: auto;
     font-size: 18px;
 }
-.nameQuestion button{
+.nameQuestion button {
     font-size: 20px;
     margin-top: 20px;
     background-color: black;
@@ -66,9 +67,9 @@ nav .navBar li {
     padding: 20px 50px 20px 50px;
     border-radius: 50px;
     border: black 2px solid;
-    transition: ease-in-out .4s;
+    transition: ease-in-out 0.4s;
 }
-.nameQuestion button:hover{
+.nameQuestion button:hover {
     background-color: transparent;
     color: black;
 }
