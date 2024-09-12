@@ -1,7 +1,11 @@
-const groupNameKey: string = "myGroupNameKey"; 
+import { link } from "fs";
+
+const groupNameKey: string = "myGroupNameKey";
 
 function getTripName() {
-    const inputUitje: HTMLInputElement | null = document.getElementById("uitjeName") as HTMLInputElement | null;
+    const inputUitje: HTMLInputElement | null = document.getElementById(
+        "uitjeName"
+    ) as HTMLInputElement | null;
 
     if (inputUitje !== null) {
         const tripName: string = inputUitje.value;
@@ -23,7 +27,7 @@ function loadNewField() {
 
 function displayGroupName() {
     const storedGroupName = localStorage.getItem(groupNameKey);
-    
+
     if (storedGroupName) {
         document.getElementById("groupNameTitle")!.innerHTML = storedGroupName;
     } else {
@@ -31,29 +35,42 @@ function displayGroupName() {
     }
 }
 
-// Function to handle tab switching
 function handleTabClick(event: Event): void {
-    const target = event.target as HTMLElement; // Type assertion to get the clicked element
-  
-    if (target && target.classList.contains('tab')) {
-      // Remove 'active' class from all tabs and content
-      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-      document.querySelectorAll('.content').forEach(content => content.classList.remove('active'));
-  
-      // Add 'active' class to the clicked tab and its corresponding content
-      const selectedTab = target.getAttribute('data-tab');
-      if (selectedTab) {
-        target.classList.add('active');
-        const contentElement = document.getElementById(selectedTab);
-        if (contentElement) {
-          contentElement.classList.add('active');
+    const target = event.target as HTMLElement;
+
+    if (target && target.classList.contains("tab")) {
+        document.querySelectorAll(".tab").forEach((tab) => tab.classList.remove("active"));
+        document.querySelectorAll(".content").forEach((content) => content.classList.remove("active"));
+
+        const selectedTab = target.getAttribute("data-tab");
+        if (selectedTab) {
+            target.classList.add("active");
+            const contentElement = document.getElementById(selectedTab);
+            if (contentElement) {
+                contentElement.classList.add("active");
+            }
         }
-      }
     }
-  }
-  
-  // Add event listeners to tabs
-  const tabs = document.querySelectorAll('.tab');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', handleTabClick);
-  });
+}
+const tabs = document.querySelectorAll(".tab");
+tabs.forEach((tab) => {
+    tab.addEventListener("click", handleTabClick);
+});
+
+function addPerson() {
+    const inputValueName: string | null = prompt("Vul naam van de gebruiker in");
+
+    if (inputValueName) {
+        const li = document.createElement("li");
+        li.textContent = inputValueName;
+
+        const peopleList = document.getElementById("peopleList");
+        if (peopleList) {
+            peopleList.appendChild(li);
+        } else {
+            console.error("peopleList element not found");
+        }
+    } else {
+        console.log("No name was entered.");
+    }
+}

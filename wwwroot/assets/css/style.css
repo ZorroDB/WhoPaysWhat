@@ -94,6 +94,7 @@ nav .navBar li {
     width: 100%;
     display: flex;
     border: 1px solid black;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 3px 2px;
 }
 .navList > li {
     border-left: 1px solid black;
@@ -129,8 +130,8 @@ nav .navBar li {
     background-color: #eac448;
 }
 .personGrid > li{
-    border: solid 1px black;
     padding: 20px 40px 20px 40px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 .person{
     padding: 10px;
