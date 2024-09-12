@@ -58,19 +58,43 @@ tabs.forEach((tab) => {
 });
 
 function addPerson() {
-    const inputValueName: string | null = prompt("Vul naam van de gebruiker in");
+    const peopleList = document.getElementById("peopleList");
 
-    if (inputValueName) {
-        const li = document.createElement("li");
-        li.textContent = inputValueName;
-
-        const peopleList = document.getElementById("peopleList");
+    function addPersonToList(name: string) {
         if (peopleList) {
+            const li = document.createElement("li");
+            li.textContent = name;
             peopleList.appendChild(li);
-        } else {
-            console.error("peopleList element not found");
+
+            saveListToLocalStorage();
         }
-    } else {
-        console.log("No name was entered.");
+    }
+
+    function saveListToLocalStorage() {
+        if (peopleList) {
+            const listItems = peopleList.querySelectorAll("li");
+            const names = Array.from(listItems).map((li) => li.textContent || ""); // Get all names from the list
+            localStorage.setItem("peopleList", JSON.stringify(names)); // Save as JSON string
+        }
+    }
+
+    // Function to load the list from localStorage
+    function loadListFromLocalStorage() {
+        const storedList = localStorage.getItem("peopleList");
+        if (storedList && peopleList) {
+            const names = JSON.parse(storedList);
+            names.forEach((name: string) => {
+                const li = document.createElement("li");
+                li.textContent = name;
+                peopleList.appendChild(li);
+            });
+        }
+    }
+
+    loadListFromLocalStorage();
+
+    const inputValueName: string | null = prompt("Vul naam van de gebruiker in");
+    if (inputValueName) {
+        addPersonToList(inputValueName);
     }
 }
