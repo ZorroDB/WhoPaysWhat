@@ -10,6 +10,19 @@ a {
     color: inherit;
     text-decoration: none;
 }
+button{
+    font-size: 20px;
+    margin-top: 20px;
+    background-color:#f7ce4c;
+    color: black;
+    padding: 20px 50px 20px 50px;
+    border: black 2px solid;
+    transition: ease-in-out 0.4s;
+}
+button:hover {
+    background-color: black;
+    color:#f7ce4c;
+}
 .titlePage {
     text-align: center;
     margin-left: auto;
@@ -54,7 +67,7 @@ nav .navBar li {
     height: 40px;
     background-color: transparent;
     border: black 2px solid;
-    padding-left: 20px; 
+    padding-left: 20px;
     display: block;
     margin: auto;
     font-size: 18px;
@@ -72,4 +85,53 @@ nav .navBar li {
 .nameQuestion button:hover {
     background-color: transparent;
     color: black;
+}
+#groupNameTitle {
+    text-align: center;
+}
+.navList {
+    list-style-type: none;
+    width: 100%;
+    display: flex;
+    border: 1px solid black;
+}
+.navList > li {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    padding: 10px 20px 10px 20px;
+    transition: ease-in-out 0.5s;
+}
+.navList > li:hover {
+    background-color: black;
+    color: #f7ce4c;
+}
+.content {
+    display: none;
+}
+
+.content.active {
+    display: block;
+}
+
+.tab.active {
+    font-weight: bold;
+    background-color: black;
+    color: #f7ce4c;
+}
+.personGrid{
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 10px;
+    padding: 10px;
+    list-style-type: none;
+    text-align: center;
+    background-color: #eac448;
+}
+.personGrid > li{
+    border: solid 1px black;
+    padding: 20px 40px 20px 40px;
+}
+.person{
+    padding: 10px;
 }
