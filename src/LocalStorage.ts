@@ -1,10 +1,8 @@
-function saveListToLocalStorage() {
+export function saveListToLocalStorage(names: string[]) {
     localStorage.setItem("peopleList", JSON.stringify(names));
 }
 
-function loadListFromLocalStorage() {
+export function loadListFromLocalStorage(): string[] {
     const storedList = localStorage.getItem("peopleList");
-    if (storedList) {
-        names = JSON.parse(storedList);
-    }
+    return storedList ? JSON.parse(storedList) : [];
 }

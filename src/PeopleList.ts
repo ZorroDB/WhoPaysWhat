@@ -1,27 +1,17 @@
-let names: string[] = [];
+import { loadListFromLocalStorage, saveListToLocalStorage } from './LocalStorage';
 
-function addPerson(name: string, id: string) {
-    const inputValueName: string | null = prompt("Vul naam van de gebruiker in");
+let names: string[] = loadListFromLocalStorage();
 
-    const peopleList = document.getElementById("peopleList");
-    
-    if (peopleList) {
-        peopleList.innerHTML = "";
-
-        names.forEach((name) => {
-            const li = document.createElement("li");
-            li.textContent = name;
-            peopleList.appendChild(li);
-        });
-    }
-
-
-    //-----------------------------//
-    if (inputValueName) {
-        if(!names.includes(inputValueName))
-        names.push(inputValueName);
-        saveListToLocalStorage();
+export function addPerson(name: string) {
+    if(!names.includes(name)) {
+        names.push(name);
+        saveListToLocalStorage(names);
     } else {
-        alert("this user already exists!");
+        alert("This user already exists!");
     }
+}
+
+export function removePerson(name: string) {
+    names = names.filter(n => n !== name);
+    saveListToLocalStorage(names);
 }

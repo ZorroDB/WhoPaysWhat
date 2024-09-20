@@ -1,4 +1,4 @@
-function handleTabClick(event: Event): void {
+export function handleTabClick(event: Event): void {
     const target = event.target as HTMLElement;
 
     if (target && target.classList.contains("tab")) {
@@ -15,8 +15,3 @@ function handleTabClick(event: Event): void {
         }
     }
 }
-const tabs = document.querySelectorAll(".tab");
-tabs.forEach((tab) => {
-    tab.addEventListener("click", handleTabClick);
-});
-
