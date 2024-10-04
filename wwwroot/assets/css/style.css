@@ -65,6 +65,9 @@ nav .navBar li {
     text-align: center;
     width: 100%;
 }
+.nameQuestion h2{
+    margin-top: 10px;
+}
 
 .nameQuestion .uitjeName {
     border-radius: 50px;
@@ -178,4 +181,14 @@ li i {
 .saveBtn:hover{
     background-color: black;
     color:#f7ce4c;
+}
+.return{
+    font-size: 12px;
+    transition: .5s ease-in-out;
+}
+.return span{
+    margin-left: 10px;
+}
+.return:hover{
+    font-size: 14px;
 }
