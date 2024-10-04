@@ -19,22 +19,21 @@
         <ul class="navUitje">
             <a href="index.html"><li><span>DOKKIE</span></li></a>
             <a href="index.html"><li>Home</li></a>
-            <a href="bestaand.html"><li>Bestaand uitje</li></a>
-            <button onclick="reset()">debug reset</button>
+            <a href="bestaand.html"><li>Trips</li></a>
         </ul>
         <h1 class="uitjeTitle">Dashboard</h1></a>
     </nav>
     <main>
         <h1 id="groupNameTitle"></h1>
         <ul class="navList">
-            <li class="tab active" data-tab="persons">Personen</li>
-            <li class="tab" data-tab="payments">Betalingen</li>
-            <li class="tab" data-tab="general">Algemeen</li>
+            <li class="tab active" data-tab="persons">People</li>
+            <li class="tab" data-tab="payments">Payments</li>
+            <li class="tab" data-tab="general">General</li>
         </ul>
         <div class="tab-content">
             <div id="persons" class="content active">
                 <div class="person">
-                    <button class="btnStyle" onclick="addPerson()">Voeg toe</button>
+                    <button class="btnStyle" onclick="addPerson()">Add</button>
                     
                     <ul class="personGrid" id="peopleList">
                         <li>You<i class="fa-solid fa-trash-can"></i></li>
@@ -43,7 +42,7 @@
             </div>
         </div>
         <div id="payments" class="content">
-            <button class="btnStyle">Nieuwe Betaling</button>
+            <button class="btnStyle">New Payment</button>
         </div>
         <div id="general" class="content">
             <!-- General content here -->
