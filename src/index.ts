@@ -1,5 +1,14 @@
 const key: string = "myGroupNameKey";
 
+const eventSubmitBtn = document.getElementById("planTrip");
+const addPersonBtn = document.getElementById("addPerson");
+const saveGroupBtn = document.getElementById("saveGroup");
+
+addPersonBtn?.addEventListener("click", addPerson);
+eventSubmitBtn?.addEventListener("click", getTripName);
+saveGroupBtn?.addEventListener("click", saveGroup);
+
+
 function getTripName() {
     const inputUitje: HTMLInputElement | null = document.getElementById(
         "uitjeName"
@@ -31,29 +40,6 @@ function displayGroupName() {
         document.getElementById("groupNameTitle")!.innerHTML = "No group name found!";
     }
 }
-
-// function handleTabClick(event: Event): void {
-//     const target = event.target as HTMLElement;
-
-//     if (target && target.classList.contains("tab")) {
-//         document.querySelectorAll(".tab").forEach((tab) => tab.classList.remove("active"));
-//         document.querySelectorAll(".content").forEach((content) => content.classList.remove("active"));
-
-//         const selectedTab = target.getAttribute("data-tab");
-//         if (selectedTab) {
-//             target.classList.add("active");
-//             const contentElement = document.getElementById(selectedTab);
-//             if (contentElement) {
-//                 contentElement.classList.add("active");
-//             }
-//         }
-//     }
-// }
-
-// const tabs = document.querySelectorAll(".tab");
-// tabs.forEach((tab) => {
-//     tab.addEventListener("click", handleTabClick);
-// });
 
 let names: string[] = [];
 
@@ -106,10 +92,13 @@ function displayNames() {
         });
     }
 }
-function removePerson(index: number) {
-    names.splice(index, 1);
 
-    saveGroup();
+function removePerson(index: number) {
+    let confirmationRemove: boolean = confirm("Are you sure you wish to remove this user?");
+
+    if (confirmationRemove) {
+        names.splice(index, 1);
+    }
     displayNames();
 }
 

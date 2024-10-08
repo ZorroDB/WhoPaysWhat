@@ -43,6 +43,10 @@ a {
 }
 nav .navBar li {
     color: inherit;
+    transition: 0.5s ease-in-out;
+}
+nav .navBar li:hover{
+    font-size: 26px;
 }
 .navBar i .loginIcon {
     vertical-align: baseline;
@@ -111,10 +115,6 @@ nav .navBar li {
     padding: 10px 20px 10px 20px;
     transition: ease-in-out 0.5s;
 }
-.navList > li:hover {
-    background-color: black;
-    color: #f7ce4c;
-}
 .content {
     display: none;
 }
@@ -147,14 +147,19 @@ nav .navBar li {
 }
 .navUitje{
     display: flex;
+    transition: 0.5s ease-in-out;
 }
 .navUitje li{
     padding: 20px;
     list-style-type: none;
     vertical-align: middle;
+    transition: 0.5s ease-in-out;
 }
 .navUitje span{
     font-size: 30px;
+}
+.navUitje li:hover{
+    font-size: 26px;
 }
 .personGrid li {
     display: flex;
@@ -182,13 +187,4 @@ li i {
     background-color: black;
     color:#f7ce4c;
 }
-.return{
-    font-size: 12px;
-    transition: .5s ease-in-out;
-}
-.return span{
-    margin-left: 10px;
-}
-.return:hover{
-    font-size: 14px;
-}
+

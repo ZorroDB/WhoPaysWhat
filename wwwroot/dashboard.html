@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
     <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="dashboard.html">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,6 +16,7 @@
 </head>
 
 <body onload="displayGroupName()">
+    <!-- different scripts -->
     <nav>
         <ul class="navUitje">
             <a href="index.html"><li><span>DOKKIE</span></li></a>
@@ -33,8 +35,7 @@
         <div class="tab-content">
             <div id="persons" class="content active">
                 <div class="person">
-                    <button class="btnStyle" onclick="addPerson()">Add</button>
-                    
+                    <button class="btnStyle" id="addPerson">Add</button>
                     <ul class="personGrid" id="peopleList">
                         <li>You<i class="fa-solid fa-trash-can"></i></li>
                     </ul>
@@ -46,7 +47,7 @@
         </div>
         <div id="general" class="content">
         </div>
-        <button class="saveBtn" onclick="saveGroup()">Save Group</button>
+        <button class="saveBtn" id="saveGroup">Save Group</button>
     </main>
 
     <script src="../src/index.ts"></script>
