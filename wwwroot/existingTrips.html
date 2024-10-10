@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
     <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="bestaandUitje.html">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,18 +14,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
 
-<body onload="existingGroups()">
-    <nav></nav>
+<body onload="loadExistingGroups()">
+    <nav>
         <ul class="navUitje">
             <a href="index.html"><li><span>DOKKIE</span></li></a>
             <a href="index.html"><li>Home</li></a>
             <a href="nieuwUitje.html"><li>New Trip</li></a>
         </ul>
-        <h1 class="uitjeTitle">Trips</h1></a>
     </nav>
+    <h1 class="uitjeTitle">Trips</h1>
     <ul id="existingTrips">
         <p>Existing trips:</p>
-        <li></li>
+        <!-- List items will be dynamically generated here -->
     </ul>
 
     <script src="../src/index.ts"></script>

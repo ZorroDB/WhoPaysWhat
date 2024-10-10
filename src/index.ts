@@ -112,6 +112,20 @@ function saveGroup() {
     }
 }
 
+function saveGroupName() {
+    
+}
+
+
+
+
+
+
+
+
+
+
+
 window.onload = () => {
     displayGroupName();
     loadListFromLocalStorage();
