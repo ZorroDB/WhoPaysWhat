@@ -3,74 +3,100 @@ body {
     padding: 0;
     font-family: "Poppins", sans-serif;
     font-weight: 500;
-    font-style: normal;
     background-color: #f7ce4c;
+    transition: background-color 0.3s;
 }
+
 a {
     color: inherit;
     text-decoration: none;
+    transition: color 0.3s; 
 }
-.btnStyle{
+
+li {
+    list-style: none;
+}
+footer{
+    text-align: center;
+}
+.btnStyle {
     font-size: 20px;
     margin-top: 20px;
-    background-color:#f7ce4c;
+    background-color: #f7ce4c;
     color: black;
-    padding: 20px 50px 20px 50px;
-    border: black 2px solid;
-    transition: ease-in-out 0.4s;
+    padding: 20px 50px;
+    border-radius: 10px;
+    border: 2px solid black;
+    transition: background-color 0.4s, color 0.4s; 
 }
+
 .btnStyle:hover {
     background-color: black;
-    color:#f7ce4c;
+    color: #f7ce4c;
 }
+
 .titlePage {
     text-align: center;
-    margin-left: auto;
     letter-spacing: 10px;
     font-size: 70px;
+    transition: font-size 0.3s; 
 }
-.uitjeTitle{
+
+.uitjeTitle {
     text-align: center;
-    margin-left: auto;
     font-size: 5vh;
 }
+
 .navBar {
     display: flex;
     justify-content: center;
     gap: 30px;
     list-style-type: none;
-    text-decoration: none;
 }
+
 nav .navBar li {
     color: inherit;
-    transition: 0.5s ease-in-out;
+    transition: transform 0.5s ease-in-out, color 0.3s; 
 }
-nav .navBar li:hover{
-    font-size: 26px;
+
+nav .navBar li:hover {
+    transform: scale(1.4);
+    color: #333; 
 }
-.navBar i .loginIcon {
+
+.navBar i.loginIcon {
     vertical-align: baseline;
 }
+
 .gap {
     height: 100px;
     width: 100%;
 }
+
 .headText {
     text-align: center;
     width: 70%;
     margin: auto;
+    transition: margin 0.3s; 
 }
+
 .headText img {
     margin-bottom: 40px;
+    padding: 20px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
-/* ------------------------------------------ */
 
 .nameQuestion {
     text-align: center;
     width: 100%;
 }
-.nameQuestion h2{
+
+.nameQuestion h2 {
     margin-top: 10px;
+    transition: margin 0.3s;
 }
 
 .nameQuestion .uitjeName {
@@ -78,30 +104,38 @@ nav .navBar li:hover{
     width: 25%;
     height: 40px;
     background-color: transparent;
-    border: black 2px solid;
+    border: 2px solid black;
     padding-left: 20px;
     display: block;
     margin: auto;
     font-size: 18px;
+    transition: border-color 0.3s;
 }
+
+.nameQuestion .uitjeName:focus {
+    border-color: #333; 
+}
+
 .nameQuestion button {
     font-size: 20px;
     margin-top: 20px;
     background-color: black;
     color: #f7ce4c;
-    padding: 20px 50px 20px 50px;
-    border-radius: 50px;
-    border: black 2px solid;
-    transition: ease-in-out 0.4s;
+    padding: 20px 50px;
+    border-radius: 10px;
+    border: 2px solid black;
+    transition: background-color 0.4s, color 0.4s; 
 }
+
 .nameQuestion button:hover {
     background-color: transparent;
     color: black;
 }
+
 #groupNameTitle {
     text-align: center;
 }
-/* Dashboard */
+
 .navList {
     list-style-type: none;
     width: 100%;
@@ -109,12 +143,19 @@ nav .navBar li:hover{
     border: 1px solid black;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 3px 2px;
 }
+
 .navList > li {
     border-left: 1px solid black;
     border-right: 1px solid black;
-    padding: 10px 20px 10px 20px;
-    transition: ease-in-out 0.5s;
+    padding: 10px 20px;
+    transition: background-color 0.5s, transform 0.3s;
 }
+
+.navList > li:hover {
+    background-color: rgba(0, 0, 0, 0.1); 
+    transform: scale(1.05);
+}
+
 .content {
     display: none;
 }
@@ -128,63 +169,181 @@ nav .navBar li:hover{
     background-color: black;
     color: #f7ce4c;
 }
-.personGrid{
+
+.personGrid {
     height: 100%;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     padding: 10px;
     list-style-type: none;
     text-align: center;
     background-color: #eac448;
 }
-.personGrid > li{
-    padding: 20px 40px 20px 40px;
+
+.personGrid > li {
+    padding: 10px;
+    background-color: #f7ce4c; 
+    color: black;
+    border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
 }
-.person{
+
+.personGrid > li:hover {
+    background-color: black;
+    color: #f7ce4c;
+    transform: scale(1.05);
+}
+
+.person {
     padding: 10px;
 }
-.navUitje{
+
+.navUitje {
     display: flex;
     transition: 0.5s ease-in-out;
 }
-.navUitje li{
+
+.navUitje li {
     padding: 20px;
     list-style-type: none;
     vertical-align: middle;
-    transition: 0.5s ease-in-out;
+    transition: background-color 0.3s, font-size 0.3s; 
 }
-.navUitje span{
+
+.navUitje li:hover {
+    font-size: 26px;
+    background-color: rgba(0, 0, 0, 0.1); 
+}
+
+.navUitje span {
     font-size: 30px;
 }
-.navUitje li:hover{
-    font-size: 26px;
-}
+
 .personGrid li {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
     padding: 0.5rem;
 }
 
 li i {
     cursor: pointer;
-    margin-left: 10px; 
+    margin-left: 10px;
+    transition: color 0.3s;
 }
-.saveBtn{
+
+li i:hover {
+    color: #f7ce4c;
+}
+
+.saveBtn {
     font-size: 20px;
     margin-top: 20px;
-    background-color:#f7ce4c;
+    background-color: #f7ce4c;
     color: black;
-    padding: 20px 50px 20px 50px;
-    border: black 2px solid;
-    transition: ease-in-out 0.4s;
+    padding: 20px 50px;
+    border-radius: 10px;
+    border: 2px solid black;
+    transition: background-color 0.4s, color 0.4s;
     position: absolute;
     right: 10px;
 }
-.saveBtn:hover{
+
+.saveBtn:hover {
     background-color: black;
-    color:#f7ce4c;
+    color: #f7ce4c;
 }
 
+.return {
+    font-size: 14px;
+    transition: transform 0.5s;
+}
+
+.return span {
+    margin-left: 10px;
+}
+.return:hover{
+    transform: scale(1.3);
+}
+
+.existingTrips {
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    padding: 10px;
+    list-style-type: none;
+    text-align: center;
+    background-color: #eac448;
+}
+
+.existingTrips > li {
+    padding: 20px;
+    background-color: #f7ce4c; 
+    color: black;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    cursor: pointer; 
+}
+
+.existingTrips > li:hover {
+    background-color: black;
+    color: #f7ce4c;
+    transform: scale(1.05);
+}
+.hero {
+    background-color: black;
+    padding: 60px;
+    text-align: center;
+    color: #eac448;
+    margin-bottom: 30px;
+    box-shadow: rgba(88, 88, 88, 0.3) 0px 4px 20px;
+    border-radius: 12px;
+    position: relative;
+}
+
+.hero h2 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-top: 0;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    background-color: #eac448;
+    bottom: 0;
+    left: 0;
+}
+
+.tips {
+    background-color: #ffffff;
+    padding: 30px;
+    margin: 30px auto;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    text-align: center;
+    max-width: 800px;
+}
+
+.tips h3 {
+    font-size: 28px;
+    color: black;
+    margin-bottom: 15px;
+}
+
+.tips p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-top: 0;
+    color: #555;
+}

@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
     <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="dashboard.html">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
         rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
 
 <body onload="displayGroupName()">
-    <!-- different scripts -->
     <nav>
         <ul class="navUitje">
-            <a href="index.html"><li><span>DOKKIE</span></li></a>
-            <a href="index.html"><li>Home</li></a>
-            <a href="existingTrips.html"><li>Trips</li></a>
+            <li><a href="index.html"><span>DOKKIE</span></a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="existingTrips.html">Trips</a></li>
         </ul>
-        <h1 class="uitjeTitle">Dashboard</h1></a>
+        <h1 class="uitjeTitle">Dashboard</h1>
     </nav>
     <main>
-        <h1 id="groupNameTitle"></h1>
+        <h1 id="groupNameTitle" aria-live="polite"></h1>
         <ul class="navList">
-            <li class="tab active" data-tab="persons">People</li>
-            <li class="tab" data-tab="payments">Payments</li>
-            <li class="tab" data-tab="general">General</li>
+            <li class="tab active" data-tab="persons" role="tab">People</li>
+            <li class="tab" data-tab="payments" role="tab">Payments</li>
+            <li class="tab" data-tab="general" role="tab">General</li>
         </ul>
         <div class="tab-content">
             <div id="persons" class="content active">
                 <div class="person">
-                    <button class="btnStyle" id="addPerson">Add</button>
+                    <button class="btnStyle" id="addPerson" type="button">Add</button>
                     <ul class="personGrid" id="peopleList">
-                        <li>You<i class="fa-solid fa-trash-can"></i></li>
+                        <li>You <i class="fa-solid fa-trash-can"></i></li>
                     </ul>
                 </div>
             </div>
+            <div id="payments" class="content">
+                <button class="btnStyle" type="button">New Payment</button>
+            </div>
+            <div id="general" class="content">
+                <!-- Additional content can go here -->
+            </div>
         </div>
-        <div id="payments" class="content">
-            <button class="btnStyle">New Payment</button>
-        </div>
-        <div id="general" class="content">
-        </div>
-        <button class="saveBtn" id="saveGroup">Save Group</button>
+        <button class="saveBtn" id="saveGroup" type="button">Save Group</button>
     </main>
-
+    <footer>
+        <p>&copy; 2024 Dokkie. All rights reserved.</p>
+    </footer>
     <script src="../src/index.ts"></script>
 
 </body>
