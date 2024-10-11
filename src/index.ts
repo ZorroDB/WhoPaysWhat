@@ -138,20 +138,27 @@ function loadExistingGroups(): void {
     const tripsNames: HTMLElement | null = document.getElementById("existingTrips");
     if (tripsNames) {
         tripsNames.innerHTML = "";
-        groups.forEach((group: string, index: number) => {
+        groups.forEach((group: string) => {
             const li: HTMLLIElement = document.createElement("li");
-            const uniqueId = `group-${Date.now()}-${index}`; 
+            const uniqueId = crypto.randomUUID(); 
             li.id = uniqueId;
             const groupText: Text = document.createTextNode(group);
-            const icon: HTMLElement = document.createElement("i");
-            icon.classList.add("fa-solid", "fa-trash-can");
-            icon.addEventListener("click", () => {
-                removeGroup(index);
-            });
             li.appendChild(groupText);
             tripsNames.appendChild(li);
+
+            localStorage.setItem(uniqueId, group);
+
+            li.addEventListener("click", () => {
+                handleGroupClick(uniqueId);
+            })
         });
     }
+}
+function handleGroupClick(id: string): void {
+    const groupName = localStorage.getItem(id);
+
+    console.log("id: " + id);
+    console.log("group: " + groupName);
 }
 
 window.onload = (): void => {

@@ -148,12 +148,13 @@ nav .navBar li:hover {
     border-left: 1px solid black;
     border-right: 1px solid black;
     padding: 10px 20px;
-    transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .navList > li:hover {
-    background-color: rgba(0, 0, 0, 0.1); 
-    transform: scale(1.3);
+    background-color: black;
+    color: #eac448;
 }
 
 .content {
