@@ -60,7 +60,7 @@ nav .navBar li {
 }
 
 nav .navBar li:hover {
-    transform: scale(1.4);
+    transform: scale(1.3);
     color: #333; 
 }
 
@@ -148,12 +148,12 @@ nav .navBar li:hover {
     border-left: 1px solid black;
     border-right: 1px solid black;
     padding: 10px 20px;
-    transition: background-color 0.5s, transform 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .navList > li:hover {
     background-color: rgba(0, 0, 0, 0.1); 
-    transform: scale(1.05);
+    transform: scale(1.3);
 }
 
 .content {
@@ -202,19 +202,18 @@ nav .navBar li:hover {
 
 .navUitje {
     display: flex;
-    transition: 0.5s ease-in-out;
+    transition: 0.3s ease-in-out;
 }
 
 .navUitje li {
     padding: 20px;
     list-style-type: none;
     vertical-align: middle;
-    transition: background-color 0.3s, font-size 0.3s; 
+    transition: background-color 0.3s, transform 0.3s; 
 }
 
 .navUitje li:hover {
-    font-size: 26px;
-    background-color: rgba(0, 0, 0, 0.1); 
+    transform: scale(1.3);
 }
 
 .navUitje span {
@@ -346,4 +345,15 @@ li i:hover {
     line-height: 1.5;
     margin-top: 0;
     color: #555;
+}
+#tripsTitle{
+    padding: 30px;
+    text-align: center;
+    max-width: 800px;
+    margin: 30px auto;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 36px;
 }

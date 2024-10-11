@@ -114,6 +114,13 @@ function removePerson(index: number): void {
         displayNames();
     }
 }
+function removeGroup(index: number): void {
+    const confirmationRemove: boolean = confirm("Are you sure you wish to remove this group?");
+    if (confirmationRemove) {
+        groups.splice(index, 1);
+        displayNames();
+    }
+}
 
 function saveGroup(): void {
     if (names.length >= 2) {
@@ -136,6 +143,11 @@ function loadExistingGroups(): void {
             const uniqueId = `group-${Date.now()}-${index}`; 
             li.id = uniqueId;
             const groupText: Text = document.createTextNode(group);
+            const icon: HTMLElement = document.createElement("i");
+            icon.classList.add("fa-solid", "fa-trash-can");
+            icon.addEventListener("click", () => {
+                removeGroup(index);
+            });
             li.appendChild(groupText);
             tripsNames.appendChild(li);
         });
