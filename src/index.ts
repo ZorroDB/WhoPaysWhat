@@ -3,16 +3,22 @@ const key: string = "myGroupNameKey";
 let names: string[] = [];
 let groups: string[] = [];
 
-const eventSubmitBtn: HTMLButtonElement | null = document.getElementById("planTrip") as HTMLButtonElement | null;
-const addPersonBtn: HTMLButtonElement | null = document.getElementById("addPerson") as HTMLButtonElement | null;
-const saveGroupBtn: HTMLButtonElement | null = document.getElementById("saveGroup") as HTMLButtonElement | null;
+const eventSubmitBtn: HTMLElement | null = document.getElementById("planTrip");
+const addPersonBtn: HTMLElement | null = document.getElementById("addPerson");
+const saveGroupBtn: HTMLElement | null = document.getElementById("saveGroup");
 
-addPersonBtn?.addEventListener("click", addPerson);
-eventSubmitBtn?.addEventListener("click", getTripName);
-saveGroupBtn?.addEventListener("click", saveGroup);
+if (addPersonBtn) {
+    addPersonBtn.addEventListener("click", addPerson);
+}
+if (eventSubmitBtn) {
+    eventSubmitBtn.addEventListener("click", getTripName);
+}
+if (saveGroupBtn) {
+    saveGroupBtn.addEventListener("click", saveGroup);
+}
 
 function getTripName(): void {
-    const inputUitje: HTMLInputElement | null = document.getElementById("uitjeName") as HTMLInputElement | null;
+    const inputUitje: HTMLInputElement | null = document.getElementById("uitjeName") as HTMLInputElement;
     if (inputUitje !== null) {
         const tripName: string = inputUitje.value.trim();
         if (tripName) {
@@ -25,8 +31,7 @@ function getTripName(): void {
                 names = [];
                 saveListToLocalStorage();
                 displayNames();
-            }
-            catch (e) {
+            } catch (e) {
                 console.error("Could not save group name.");
             }
             loadNewField();
@@ -55,8 +60,7 @@ function addPerson(): void {
         if (!names.includes(inputValueName)) {
             names.push(inputValueName);
             displayNames();
-        }
-        else {
+        } else {
             alert("This user already exists!");
         }
     }
@@ -88,10 +92,10 @@ function displayNames(): void {
     const peopleList: HTMLElement | null = document.getElementById("peopleList");
     if (peopleList) {
         peopleList.innerHTML = "";
-        names.forEach((name, index) => {
-            const li: HTMLElement | null = document.createElement("li");
-            const nameText: Text | null = document.createTextNode(name);
-            const icon: HTMLElement | null = document.createElement("i");
+        names.forEach((name: string, index: number) => {
+            const li: HTMLLIElement = document.createElement("li");
+            const nameText: Text = document.createTextNode(name);
+            const icon: HTMLElement = document.createElement("i");
             icon.classList.add("fa-solid", "fa-trash-can");
             icon.addEventListener("click", () => {
                 removePerson(index);
@@ -116,7 +120,8 @@ function saveGroup(): void {
         alert("Group has been saved!");
         saveListToLocalStorage();
         saveGroupListToLocalStorage();
-    } else {
+    }
+    else {
         alert("Maak alstublieft zeker om meer dan 2 personen toe te voegen!");
     }
 }
@@ -126,8 +131,10 @@ function loadExistingGroups(): void {
     const tripsNames: HTMLElement | null = document.getElementById("existingTrips");
     if (tripsNames) {
         tripsNames.innerHTML = "";
-        groups.forEach((group) => {
-            const li: HTMLElement = document.createElement("li");
+        groups.forEach((group: string, index: number) => {
+            const li: HTMLLIElement = document.createElement("li");
+            const uniqueId = `group-${Date.now()}-${index}`; 
+            li.id = uniqueId;
             const groupText: Text = document.createTextNode(group);
             li.appendChild(groupText);
             tripsNames.appendChild(li);
