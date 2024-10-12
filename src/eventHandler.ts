@@ -1,5 +1,5 @@
 import { getGroups, getNames } from '.';
-import { addPerson, displayNames, loadExistingGroups } from './DOMManipulation';
+import { addPerson, displayNames } from './DOMManipulation';
 import { saveGroupListToLocalStorage, saveListToLocalStorage } from './LocalStorage';
 
 const eventSubmitBtn: HTMLElement | null = document.getElementById("planTrip");

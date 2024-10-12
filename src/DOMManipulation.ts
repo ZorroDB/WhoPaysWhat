@@ -1,5 +1,5 @@
-// DOMManipulation.ts
-import { getGroups, getNames, setNames } from './index';
+import { getGroups, getNames } from './index';
+import { loadGroupListFromLocalStorage, loadListFromLocalStorage } from './LocalStorage';
 
 export function displayGroupName(): void {
     const storedGroupName: string | null = localStorage.getItem("myGroupNameKey");
@@ -79,3 +79,11 @@ export function handleGroupClick(id: string): void {
     console.log("id: " + id);
     console.log("group: " + groupName);
 }
+
+window.onload = (): void => {
+    displayGroupName();
+    loadListFromLocalStorage();
+    loadGroupListFromLocalStorage();
+    displayNames();
+    loadExistingGroups();
+};

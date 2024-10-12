@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
 
-<body onload="displayGroupName()">
+<body>
     <nav>
         <ul class="navUitje">
             <li><a href="index.html"><span>DOKKIE</span></a></li>
@@ -49,8 +49,11 @@
     <footer>
         <p>&copy; 2024 Dokkie. All rights reserved.</p>
     </footer>
-    <script src="../src/index.ts"></script>
 
+    <script src="../src/eventHandler.ts" type="module"></script> 
+    <script src="../src/index.ts" type="module"></script>
+    <script src="../src/DOMManipulation.ts" type="module"></script>
+    <script src="../src/LocalStorage.ts" type="module"></script>
 </body>
 
 </html>
