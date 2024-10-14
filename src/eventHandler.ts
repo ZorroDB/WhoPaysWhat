@@ -2,19 +2,21 @@ import { getGroups, getNames } from '.';
 import { addPerson, displayNames } from './DOMManipulation';
 import { saveGroupListToLocalStorage, saveListToLocalStorage } from './LocalStorage';
 
-const eventSubmitBtn: HTMLElement | null = document.getElementById("planTrip");
-const addPersonBtn: HTMLElement | null = document.getElementById("addPerson");
-const saveGroupBtn: HTMLElement | null = document.getElementById("saveGroup");
+document.addEventListener("DOMContentLoaded", () => {
+    const eventSubmitBtn: HTMLElement | null = document.getElementById("planTrip");
+    const addPersonBtn: HTMLElement | null = document.getElementById("addPerson");
+    const saveGroupBtn: HTMLElement | null = document.getElementById("saveGroup");
 
-if (addPersonBtn) {
-    addPersonBtn.addEventListener("click", addPerson);
-}
-if (eventSubmitBtn) {
-    eventSubmitBtn.addEventListener("click", getTripName);
-}
-if (saveGroupBtn) {
-    saveGroupBtn.addEventListener("click", saveGroup);
-}
+    if (addPersonBtn) {
+        addPersonBtn.addEventListener("click", addPerson);
+    }
+    if (eventSubmitBtn) {
+        eventSubmitBtn.addEventListener("click", getTripName);
+    }
+    if (saveGroupBtn) {
+        saveGroupBtn.addEventListener("click", saveGroup);
+    }
+});
 
 function getTripName(): void {
     const inputUitje: HTMLInputElement | null = document.getElementById("uitjeName") as HTMLInputElement;
@@ -36,8 +38,7 @@ function getTripName(): void {
                 console.error("Could not save group name.");
             }
             loadNewField();
-        }
-        else {
+        } else {
             alert("no name entered!");
         }
     }
@@ -49,8 +50,7 @@ function saveGroup(): void {
         alert("Group has been saved!");
         saveListToLocalStorage();
         saveGroupListToLocalStorage();
-    }
-    else {
+    } else {
         alert("Please add at least 2 people to the group!");
     }
 }

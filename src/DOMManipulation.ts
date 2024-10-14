@@ -1,6 +1,14 @@
 import { getGroups, getNames } from './index';
 import { loadGroupListFromLocalStorage, loadListFromLocalStorage } from './LocalStorage';
 
+document.addEventListener("DOMContentLoaded", () => {
+    displayGroupName();
+    loadListFromLocalStorage();
+    loadGroupListFromLocalStorage();
+    displayNames();
+    loadExistingGroups();
+});
+
 export function displayGroupName(): void {
     const storedGroupName: string | null = localStorage.getItem("myGroupNameKey");
     const groupNameTitle: HTMLElement | null = document.getElementById("groupNameTitle");
@@ -58,7 +66,7 @@ export function loadExistingGroups(): void {
         tripsNames.innerHTML = "";
         groups.forEach((group: string) => {
             const li: HTMLLIElement = document.createElement("li");
-            const uniqueId = crypto.randomUUID(); 
+            const uniqueId = crypto.randomUUID();
             li.id = uniqueId;
             const groupText: Text = document.createTextNode(group);
             li.appendChild(groupText);
@@ -75,15 +83,7 @@ export function loadExistingGroups(): void {
 
 export function handleGroupClick(id: string): void {
     const groupName = localStorage.getItem(id);
-
     console.log("id: " + id);
     console.log("group: " + groupName);
+    window.location.href = "dashboard.html";
 }
-
-window.onload = (): void => {
-    displayGroupName();
-    loadListFromLocalStorage();
-    loadGroupListFromLocalStorage();
-    displayNames();
-    loadExistingGroups();
-};
