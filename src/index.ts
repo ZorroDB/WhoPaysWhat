@@ -1,20 +1,14 @@
-let names: string[] = [];
-let groups: string[] = [];
+import { CreateGroup } from './utils';
 
-export function getNames(): string[] {
-    return names;
-}
-
-export function setNames(newNames: string[]): void {
-    names = newNames;
-}
-
-export function getGroups(): string[] {
+let groups: CreateGroup[] = [];
+export function getGroups(): CreateGroup[] {
     return groups;
 }
 
-export function setGroups(newGroups: string[]): void {
+export function setGroups(newGroups: CreateGroup[]): void {
     groups = newGroups;
 }
 
-
+export function getGroupById(groupId: string): CreateGroup | undefined {
+    return groups.find(group => group.UniqueId === groupId);
+}
