@@ -6,21 +6,13 @@ export interface CreateGroup {
 
 export let groupsArray: CreateGroup[] = [];
 
-export function addGroupToArray(groupName: string) {
+export function addGroupToArray(groupName: string, people: string[]) {
     const group: CreateGroup = {
         UniqueId: Date.now().toString(),
         GroupName: groupName,
-        PeopleInGroup: []
+        PeopleInGroup: people
     };
 
     groupsArray.push(group);
     localStorage.setItem('groups', JSON.stringify(groupsArray));
-}
-
-export function addPersonToGroup(groupId: string, personName: string): void {
-    const group = groupsArray.find(group => group.UniqueId === groupId);
-    if (group) {
-        group.PeopleInGroup.push(personName);
-        localStorage.setItem('groups', JSON.stringify(groupsArray));
-    }
 }
