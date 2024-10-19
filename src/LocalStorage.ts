@@ -1,23 +1,12 @@
-import { getGroups, getNames, setGroups, setNames } from './index';
+import { getGroups, getNames } from ".";
 
 export function saveListToLocalStorage(): void {
-    localStorage.setItem("peopleList", JSON.stringify(getNames()));
+    const names = getNames();
+    localStorage.setItem("peopleList", JSON.stringify(names));
 }
 
 export function saveGroupListToLocalStorage(): void {
-    localStorage.setItem("groupList", JSON.stringify(getGroups()));
+    const groups = getGroups();
+    localStorage.setItem("groupList", JSON.stringify(groups));
 }
 
-export function loadListFromLocalStorage(): void {
-    const storedList: string | null = localStorage.getItem("peopleList");
-    if (storedList) {
-        setNames(JSON.parse(storedList));
-    }
-}
-
-export function loadGroupListFromLocalStorage(): void {
-    const storedList: string | null = localStorage.getItem("groupList");
-    if (storedList) {
-        setGroups(JSON.parse(storedList));
-    }
-}

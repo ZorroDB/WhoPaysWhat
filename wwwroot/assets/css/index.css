@@ -40,8 +40,13 @@ a {
     gap: 30px;
     list-style-type: none;
     padding: 0;
+    border-bottom: 2px solid;
 }
-
+#slogan{
+    margin: 0;
+    font-size: 16px;
+    font-weight: 300;
+}
 nav .navBar li {
     color: inherit;
     transition: transform 0.5s ease-in-out, color 0.3s; 

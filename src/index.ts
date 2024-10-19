@@ -1,18 +1,9 @@
-let names: string[] = [];
-let groups: string[] = [];
-
 export function getNames(): string[] {
-    return names;
-}
-
-export function setNames(newNames: string[]): void {
-    names = newNames;
+    const storedList: string | null = localStorage.getItem("peopleList");
+    return storedList ? JSON.parse(storedList) : [];
 }
 
 export function getGroups(): string[] {
-    return groups;
-}
-
-export function setGroups(newGroups: string[]): void {
-    groups = newGroups;
+    const storedList: string | null = localStorage.getItem("groupList");
+    return storedList ? JSON.parse(storedList) : [];
 }

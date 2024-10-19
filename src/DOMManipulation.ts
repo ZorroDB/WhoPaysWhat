@@ -1,12 +1,13 @@
-import { getGroups, getNames } from './index';
-import { loadGroupListFromLocalStorage, loadListFromLocalStorage } from './LocalStorage';
+import { Group } from './utils';
+// Assuming getNames is a function that retrieves the names array from localStorage or another source
+import { getNames } from './index';
 
+// Use a single DOMContentLoaded listener
 document.addEventListener("DOMContentLoaded", () => {
     displayGroupName();
-    loadListFromLocalStorage();
-    loadGroupListFromLocalStorage();
     displayNames();
     loadExistingGroups();
+    displayGroupDetails();
 });
 
 export function displayGroupName(): void {
@@ -19,22 +20,27 @@ export function displayGroupName(): void {
 
 export function addPerson(): void {
     const inputValueName: string | null = prompt("Enter the name of the person");
-    const names = getNames();
-    if (inputValueName && names.length < 9) {
-        if (!names.includes(inputValueName)) {
-            names.push(inputValueName);
-            displayNames();
+    if (inputValueName) {
+        const names = getNames(); // Fetch the current names
+        if (names.length < 9) {
+            if (!names.includes(inputValueName)) {
+                names.push(inputValueName); // Add new person to names array
+                localStorage.setItem("names", JSON.stringify(names)); // Save updated names
+                displayNames(); // Refresh the displayed names
+            } else {
+                alert("This user already exists!");
+            }
         } else {
-            alert("This user already exists!");
+            alert("Maximum of 9 names reached.");
         }
     }
 }
 
 export function displayNames(): void {
-    const names = getNames();
     const peopleList: HTMLElement | null = document.getElementById("peopleList");
     if (peopleList) {
         peopleList.innerHTML = "";
+        const names = getNames(); // Ensure you fetch the latest names
         names.forEach((name: string, index: number) => {
             const li: HTMLLIElement = document.createElement("li");
             const nameText: Text = document.createTextNode(name);
@@ -52,38 +58,61 @@ export function displayNames(): void {
 
 export function removePerson(index: number): void {
     const confirmationRemove: boolean = confirm("Are you sure you wish to remove this person?");
-    const names = getNames();
+    const names = getNames(); // Fetch the current names
     if (confirmationRemove) {
-        names.splice(index, 1);
-        displayNames();
+        names.splice(index, 1); // Remove the person
+        localStorage.setItem("names", JSON.stringify(names)); // Save updated names
+        displayNames(); // Refresh the displayed names
     }
 }
 
 export function loadExistingGroups(): void {
-    const groups = getGroups();
+    const groupsString = localStorage.getItem("groups");
+    const groups: Group[] = groupsString ? JSON.parse(groupsString) : [];
     const tripsNames: HTMLElement | null = document.getElementById("existingTrips");
+
     if (tripsNames) {
         tripsNames.innerHTML = "";
-        groups.forEach((group: string) => {
+        groups.forEach(group => {
             const li: HTMLLIElement = document.createElement("li");
-            const uniqueId = crypto.randomUUID();
-            li.id = uniqueId;
-            const groupText: Text = document.createTextNode(group);
+            li.id = group.id.toString(); // Use group ID
+            const groupText: Text = document.createTextNode(group.groupName);
             li.appendChild(groupText);
             tripsNames.appendChild(li);
 
-            localStorage.setItem(uniqueId, group);
-
             li.addEventListener("click", () => {
-                handleGroupClick(uniqueId);
-            })
+                handleGroupClick(group.id);
+            });
         });
     }
 }
 
-export function handleGroupClick(id: string): void {
-    const groupName = localStorage.getItem(id);
-    console.log("id: " + id);
-    console.log("group: " + groupName);
-    window.location.href = "dashboard.html";
+export function handleGroupClick(groupId: number): void {
+    localStorage.setItem("currentGroupId", groupId.toString()); // Save selected group ID
+    window.location.href = "dashboard.html"; // Redirect to dashboard
+}
+
+export function displayGroupDetails(): void {
+    const groupIdString = localStorage.getItem("currentGroupId");
+    if (groupIdString) {
+        const groupId = parseInt(groupIdString, 10);
+        const groupsString = localStorage.getItem("groups");
+        const groups: Group[] = groupsString ? JSON.parse(groupsString) : [];
+        const group = groups.find(g => g.id === groupId);
+
+        if (group) {
+            const groupNameTitle = document.getElementById("groupNameTitle");
+            if (groupNameTitle) groupNameTitle.textContent = group.groupName;
+
+            const peopleList = document.getElementById("peopleList");
+            if (peopleList) {
+                peopleList.innerHTML = "";
+                group.members.forEach(member => {
+                    const li = document.createElement("li");
+                    li.textContent = member;
+                    peopleList.appendChild(li);
+                });
+            }
+        }
+    }
 }

@@ -1,12 +1,13 @@
 :root{
-    --main-color: #fdf5df;
-    --secondary-color: #5ebec4;
-    --acent-color: #f92c85;
+    --main-color: #8D99AE;
+    --secondary-color: #2B2D42;
+    --accent-color: #F8F32B;
 }
 
 body {
     margin: 0;
     padding: 0;
+    color: white;
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     background-color: var(--main-color);
@@ -50,7 +51,7 @@ li {
     width: 25%;
     height: 40px;
     background-color: transparent;
-    border: 2px solid black;
+    border: 1px solid black;
     padding-left: 20px;
     display: block;
     margin: auto;
@@ -58,18 +59,14 @@ li {
     transition: border-color 0.3s;
 }
 
-.nameQuestion .uitjeName:focus {
-    border-color: #333; 
-}
-
 .nameQuestion button {
     font-size: 20px;
     margin-top: 20px;
-    background-color: var(--acent-color);
+    background-color: var(--accent-color);
     color: var(--secondary-color);
     padding: 20px 50px;
+    border: none;
     border-radius: 10px;
-    border: 2px solid black;
     transition: background-color 0.4s, color 0.4s; 
 }
 
