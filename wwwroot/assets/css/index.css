@@ -1,18 +1,21 @@
 :root{
-    --main-color: #8D99AE;
-    --secondary-color: #2B2D42;
-    --acent-color: #F8F32B;
+    --main-color: #F5F5DC; /* Creme background */
+    --secondary-color: #333333; /* Dark black for text and borders */
+    --accent-color: #FFD700; /* Gold/yellow for accents */
+    --text-color: #1C1C1C; /* Dark gray for text */
+    --button-hover-color: #FF6347; /* Tomato color for hover effects */
 }
 
 body {
-    color: white;
+    color: var(--text-color);
     margin: 0;
     padding: 0;
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     background-color: var(--main-color);
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
 }
+
 nav {
     display: flex;
     flex-direction: column;
@@ -20,12 +23,13 @@ nav {
     justify-content: center;
     gap: 10px;
     padding: 20px 0;
+    background-color: var(--main-color);
 }
 
 a {
-    color: inherit;
+    color: var(--text-color);
     text-decoration: none;
-    transition: color 0.3s; 
+    transition: color 0.3s;
 }
 
 .titlePage {
@@ -33,45 +37,42 @@ a {
     font-size: 70px;
     letter-spacing: 10px;
     text-align: center;
+    color: var(--secondary-color);
 }
+
 .navBar {
     display: flex;
     justify-content: center;
     gap: 30px;
     list-style-type: none;
     padding: 0;
-    border-bottom: 2px solid;
+    border-bottom: 2px solid var(--secondary-color);
 }
-#slogan{
+
+#slogan {
     margin: 0;
     font-size: 16px;
     font-weight: 300;
+    color: var(--text-color);
 }
+
 nav .navBar li {
-    color: inherit;
-    transition: transform 0.5s ease-in-out, color 0.3s; 
+    color: var(--secondary-color);
+    transition: transform 0.5s ease-in-out, color 0.3s;
 }
 
 nav .navBar li:hover {
     transform: scale(1.3);
-}
-
-.navBar i.loginIcon {
-    vertical-align: baseline;
-}
-
-.gap {
-    height: 100px;
-    width: 100%;
+    color: var(--accent-color);
 }
 
 .hero {
-    background-color: var(--acent-color);
+    background-color: var(--accent-color);
     padding: 60px;
     text-align: center;
     color: var(--secondary-color);
     margin-bottom: 30px;
-    box-shadow: rgba(88, 88, 88, 0.3) 0px 4px 20px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px;
     border-radius: 12px;
     position: relative;
 }
@@ -86,21 +87,11 @@ nav .navBar li:hover {
     margin-top: 0;
 }
 
-.hero::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 10px;
-    background-color: var(--acent-color);
-    bottom: 0;
-    left: 0;
-}
-
 .headText {
     text-align: center;
     width: 70%;
     margin: auto;
-    transition: margin 0.3s; 
+    color: var(--text-color);
 }
 
 .headText img {
@@ -112,6 +103,9 @@ nav .navBar li:hover {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
-footer{
+footer {
     text-align: center;
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+    padding: 10px;
 }

@@ -1,4 +1,3 @@
-import { getNames } from './index';
 import { Group } from './utils';
 
 document.addEventListener("DOMContentLoaded", () => {
