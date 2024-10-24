@@ -39,7 +39,27 @@
                 </div>
             </div>
             <div id="payments" class="content">
-                <button class="btnStyle" type="button">New Payment</button>
+                <h2>Payments Form</h2>
+                <form id="paymentForm">
+                    <label for="payer">Who paid what?:</label>
+                    <select name="people" id="peopleInGroup">
+                        <option value="">Choose a payer:</option>
+                    </select>
+
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" placeholder="02-03-2023" required>
+
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" name="description" placeholder="Efteling" required>
+
+                    <label for="amount">Fill in amount paid:</label>
+                    <input type="number" id="amount" name="amount" placeholder="Enter amount" required>
+
+                    <button type="submit" class="btnStyle">Add Payment</button>
+                </form>
+
+                <ul id="paymentList">
+                </ul>
             </div>
             <div id="general" class="content">
             </div>

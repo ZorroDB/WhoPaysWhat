@@ -1,4 +1,4 @@
-import { Group } from './utils';
+import { Group } from "./utils";
 
 document.addEventListener("DOMContentLoaded", () => {
     displayGroupName();
@@ -22,10 +22,10 @@ export function addPerson(): void {
         return;
     }
 
-    const groupId = parseInt(groupIdString, 10);
-    const groupsString = localStorage.getItem("groups");
+    const groupId: number = parseInt(groupIdString, 10);
+    const groupsString: string | null = localStorage.getItem("groups");
     const groups: Group[] = groupsString ? JSON.parse(groupsString) : [];
-    
+
     const group = groups.find(g => g.id === groupId);
     if (!group) {
         alert("Group not found!");
@@ -38,23 +38,24 @@ export function addPerson(): void {
             group.members.push(inputValueName);
             localStorage.setItem("groups", JSON.stringify(groups));
             displayNames();
-        } else {
+        }
+        else {
             alert("This user already exists!");
         }
     }
 }
 
 export function displayNames(): void {
-    const groupIdString = localStorage.getItem("currentGroupId");
+    const groupIdString: string | null = localStorage.getItem("currentGroupId");
     if (!groupIdString) {
         alert("No group selected!");
         return;
     }
 
-    const groupId = parseInt(groupIdString, 10);
-    const groupsString = localStorage.getItem("groups");
+    const groupId: number = parseInt(groupIdString, 10);
+    const groupsString: string | null = localStorage.getItem("groups");
     const groups: Group[] = groupsString ? JSON.parse(groupsString) : [];
-    
+
     const group = groups.find(g => g.id === groupId);
     if (!group) {
         alert("Group not found!");
@@ -84,20 +85,20 @@ export function displayNames(): void {
 
 export function removePerson(index: number): void {
     const confirmationRemove: boolean = confirm("Are you sure you wish to remove this person?");
-    const groupIdString = localStorage.getItem('currentGroupId');
+    const groupIdString = localStorage.getItem("currentGroupId");
     if (groupIdString && confirmationRemove) {
         const groupId = parseInt(groupIdString, 10);
-        
-        const groupsString = localStorage.getItem('groups');
+
+        const groupsString = localStorage.getItem("groups");
         const groups: Group[] = groupsString ? JSON.parse(groupsString) : [];
         const group = groups.find(g => g.id === groupId);
-        
+
         if (group) {
             group.members.splice(index, 1);
-            
+
             const updatedGroups = groups.map(g => g.id === groupId ? group : g);
-            localStorage.setItem('groups', JSON.stringify(updatedGroups));
-            
+            localStorage.setItem("groups", JSON.stringify(updatedGroups));
+
             displayGroupDetails();
         }
     }
@@ -130,22 +131,22 @@ export function handleGroupClick(groupId: number): void {
 }
 
 export function displayGroupDetails(): void {
-    const groupIdString = localStorage.getItem("currentGroupId");
+    const groupIdString: string | null = localStorage.getItem("currentGroupId");
     if (groupIdString) {
-        const groupId = parseInt(groupIdString, 10);
-        const groupsString = localStorage.getItem("groups");
+        const groupId: number = parseInt(groupIdString, 10);
+        const groupsString: string | null = localStorage.getItem("groups");
         const groups: Group[] = groupsString ? JSON.parse(groupsString) : [];
         const group = groups.find(g => g.id === groupId);
 
         if (group) {
-            const groupNameTitle = document.getElementById("groupNameTitle");
+            const groupNameTitle: HTMLElement | null = document.getElementById("groupNameTitle");
             if (groupNameTitle) groupNameTitle.textContent = group.groupName;
 
-            const peopleList = document.getElementById("peopleList");
+            const peopleList: HTMLElement | null = document.getElementById("peopleList");
             if (peopleList) {
                 peopleList.innerHTML = "";
                 group.members.forEach(member => {
-                    const li = document.createElement("li");
+                    const li: HTMLLIElement = document.createElement("li");
                     li.textContent = member;
                     peopleList.appendChild(li);
                 });
@@ -153,3 +154,36 @@ export function displayGroupDetails(): void {
         }
     }
 }
+
+const select: HTMLInputElement | null = document.getElementById("peopleInGroup") as HTMLInputElement | null;
+
+function showSelect(): void {
+    const storedGroup: string | null = localStorage.getItem("groups");
+    const currentGroupId: string | null = localStorage.getItem("currentGroupId");
+    const numId: number = currentGroupId ? parseInt(currentGroupId, 10) : NaN;
+
+    console.log("Current Group ID:", numId);
+
+    if (storedGroup !== null) {
+        const groupsArray = JSON.parse(storedGroup) as Array<{ id: number, groupName: string, members: string[] }>;
+
+        console.log("Groups Array:", groupsArray);
+
+        // Find the group using numId
+        const group = groupsArray.find(group => group.id === numId);
+
+        if (group) {
+            console.log(group);
+            const peopleArray: string[] = group.members;
+            console.log("People Array:", peopleArray);
+        }
+        else {
+            console.error("Group not found.");
+        }
+    }
+    else {
+        console.error("No groups stored in localStorage.");
+    }
+}
+
+showSelect();

@@ -16,6 +16,34 @@ document.addEventListener("DOMContentLoaded", () => {
     if (saveGroupBtn) {
         saveGroupBtn.addEventListener("click", saveGroup);
     }
+
+});
+
+const tabElements: NodeListOf<HTMLLIElement> = document.querySelectorAll('.tab');
+const contentSections: NodeListOf<HTMLDivElement> = document.querySelectorAll('.content');
+
+function handleTabClick(this: HTMLLIElement) {
+    // Remove 'active' class from all tabs and content sections
+    tabElements.forEach(tab => tab.classList.remove('active'));
+    contentSections.forEach(content => content.classList.remove('active'));
+
+    // Add 'active' class to the clicked tab
+    this.classList.add('active');
+
+    // Get the corresponding content section
+    const tabId = this.getAttribute('data-tab');
+    if (tabId) {
+        const targetContent = document.getElementById(tabId);
+        if (targetContent) {
+            // Show the selected content section
+            targetContent.classList.add('active');
+        }
+    }
+}
+
+// Attach event listeners to each tab element
+tabElements.forEach(tab => {
+    tab.addEventListener('click', handleTabClick);
 });
 
 function getTripName(): void {
