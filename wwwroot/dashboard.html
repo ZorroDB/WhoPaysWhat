@@ -7,12 +7,8 @@
     <link rel="stylesheet" href="assets/css/dashboard.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 </head>
-
 <body>
     <nav>
         <ul class="navUitje">
@@ -33,47 +29,45 @@
             <div id="persons" class="content active">
                 <div class="person">
                     <button class="btnStyle" id="addPerson" type="button">Add</button>
-                    <ul class="personGrid" id="peopleList">
-                        <li>You <i class="fa-solid fa-trash-can"></i></li>
-                    </ul>
+                    <ul class="personGrid" id="peopleList"></ul>
                 </div>
+                <button class="saveBtn" id="saveGroup" type="button">Save Group</button>
             </div>
             <div id="payments" class="content">
-                <h2>Payments Form</h2>
-                <form id="paymentForm">
-                    <label for="payer">Who paid what?:</label>
-                    <select name="people" id="peopleInGroup">
-                        <option value="">Choose a payer:</option>
-                    </select>
-
-                    <label for="date">Date:</label>
-                    <input type="date" id="date" name="date" placeholder="02-03-2023" required>
-
-                    <label for="description">Description:</label>
-                    <input type="text" id="description" name="description" placeholder="Efteling" required>
-
-                    <label for="amount">Fill in amount paid:</label>
-                    <input type="number" id="amount" name="amount" placeholder="Enter amount" required>
-
-                    <button type="submit" class="btnStyle">Add Payment</button>
-                </form>
-
-                <ul id="paymentList">
-                </ul>
+                <div class="full-sides">
+                    <div class="left-side">
+                        <h2>Payments Form</h2>
+                        <form id="paymentForm">
+                            <label for="payer">Who paid what?:</label>
+                            <select name="people" id="peopleInGroup">
+                                <option value="">Choose a payer:</option>
+                            </select>
+                            <label for="date">Date:</label>
+                            <input type="date" id="date" name="date" placeholder="02-03-2023" required>
+                            <label for="description">Description:</label>
+                            <input type="text" id="description" name="description" placeholder="Efteling" required>
+                            <label for="amount">Fill in amount paid:</label>
+                            <input type="number" id="amount" name="amount" placeholder="Enter amount" required>
+                            <button type="submit" class="btnStyle">Add Payment</button>
+                        </form>
+                    </div>
+                    <div class="right-side">
+                        <h2>Payment Summary</h2>
+                        <div id="paymentsList"></div>
+                        <hr />
+                        <p><span id="payerName"></span><span id="payerAmount"></span></p>
+                        <p>Total group = <span id="totalGroup"></span></p>
+                    </div>
+                </div>
             </div>
             <div id="general" class="content">
+                <p>Coming soon...</p>
             </div>
         </div>
-        <button class="saveBtn" id="saveGroup" type="button">Save Group</button>
     </main>
     <footer>
         <p>&copy; 2024 Dokkie. All rights reserved.</p>
     </footer>
-
     <script src="../src/eventHandler.ts" type="module"></script>
-    <script src="../src/index.ts" type="module"></script>
-    <script src="../src/DOMManipulation.ts" type="module"></script>
-    <script src="../src/LocalStorage.ts" type="module"></script>
 </body>
-
 </html>

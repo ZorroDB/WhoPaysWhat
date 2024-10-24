@@ -48,7 +48,6 @@ export function addPerson(): void {
 export function displayNames(): void {
     const groupIdString: string | null = localStorage.getItem("currentGroupId");
     if (!groupIdString) {
-        alert("No group selected!");
         return;
     }
 
@@ -155,27 +154,30 @@ export function displayGroupDetails(): void {
     }
 }
 
-const select: HTMLInputElement | null = document.getElementById("peopleInGroup") as HTMLInputElement | null;
-
 function showSelect(): void {
     const storedGroup: string | null = localStorage.getItem("groups");
     const currentGroupId: string | null = localStorage.getItem("currentGroupId");
     const numId: number = currentGroupId ? parseInt(currentGroupId, 10) : NaN;
 
-    console.log("Current Group ID:", numId);
-
     if (storedGroup !== null) {
         const groupsArray = JSON.parse(storedGroup) as Array<{ id: number, groupName: string, members: string[] }>;
 
-        console.log("Groups Array:", groupsArray);
-
-        // Find the group using numId
         const group = groupsArray.find(group => group.id === numId);
 
         if (group) {
-            console.log(group);
             const peopleArray: string[] = group.members;
-            console.log("People Array:", peopleArray);
+
+            const select: HTMLSelectElement | null = document.getElementById("peopleInGroup") as HTMLSelectElement;
+            if (select) {
+                select.innerHTML = "";
+
+                peopleArray.forEach(person => {
+                    const option = document.createElement("option");
+                    option.value = person;
+                    option.textContent = person;
+                    select.appendChild(option);
+                });
+            }
         }
         else {
             console.error("Group not found.");
@@ -185,5 +187,6 @@ function showSelect(): void {
         console.error("No groups stored in localStorage.");
     }
 }
+
 
 showSelect();

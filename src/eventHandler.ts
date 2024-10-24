@@ -1,6 +1,6 @@
 import { getNames } from '.';
 import { addPerson } from './DOMManipulation';
-import { addMemberToGroup, CreateGroup, Group, saveGroupToLocalStorage } from './utils';
+import { addMemberToGroup, CreateGroup, formatCurrency, Group, Payment, saveGroupToLocalStorage } from './utils';
 
 document.addEventListener("DOMContentLoaded", () => {
     const eventSubmitBtn: HTMLElement | null = document.getElementById("planTrip");
@@ -17,76 +17,197 @@ document.addEventListener("DOMContentLoaded", () => {
         saveGroupBtn.addEventListener("click", saveGroup);
     }
 
-});
+    const groupId = localStorage.getItem('currentGroupId');
+    if (groupId) {
+        loadPayments(parseInt(groupId));
 
-const tabElements: NodeListOf<HTMLLIElement> = document.querySelectorAll('.tab');
-const contentSections: NodeListOf<HTMLDivElement> = document.querySelectorAll('.content');
+        const paymentForm = document.getElementById('paymentForm') as HTMLFormElement;
 
-function handleTabClick(this: HTMLLIElement) {
-    // Remove 'active' class from all tabs and content sections
-    tabElements.forEach(tab => tab.classList.remove('active'));
-    contentSections.forEach(content => content.classList.remove('active'));
+        if (paymentForm) {
+            paymentForm.addEventListener('submit', function (event) {
+                event.preventDefault();
 
-    // Add 'active' class to the clicked tab
-    this.classList.add('active');
+                const payerSelect = document.getElementById('peopleInGroup') as HTMLSelectElement;
+                const dateInput = document.getElementById('date') as HTMLInputElement;
+                const descriptionInput = document.getElementById('description') as HTMLInputElement;
+                const amountInput = document.getElementById('amount') as HTMLInputElement;
 
-    // Get the corresponding content section
-    const tabId = this.getAttribute('data-tab');
-    if (tabId) {
-        const targetContent = document.getElementById(tabId);
-        if (targetContent) {
-            // Show the selected content section
-            targetContent.classList.add('active');
-        }
-    }
-}
+                const groupId = localStorage.getItem('currentGroupId');
+                if (!groupId) return;
 
-// Attach event listeners to each tab element
-tabElements.forEach(tab => {
-    tab.addEventListener('click', handleTabClick);
-});
+                const payment: Payment = {
+                    name: payerSelect.value,
+                    date: new Date(dateInput.value),
+                    description: descriptionInput.value,
+                    payments: parseFloat(amountInput.value)
+                };
 
-function getTripName(): void {
-    const inputUitje: HTMLInputElement | null = document.getElementById("uitjeName") as HTMLInputElement;
-    if (inputUitje !== null) {
-        const tripName: string = inputUitje.value.trim();
-        if (tripName) {
-            try {
-                const newGroup = CreateGroup(tripName);
-                saveGroupToLocalStorage(newGroup);
-                localStorage.setItem("myGroupNameKey", tripName);
-
-                loadNewField();
-            } catch (e) {
-                console.error("Could not save group name.");
-            }
+                addPayment(parseInt(groupId), payment);
+                paymentForm.reset();
+            });
         } else {
-            alert("No name entered!");
+            console.error("Payment form not found.");
+        }
+    };
+
+    const tabElements: NodeListOf<HTMLLIElement> = document.querySelectorAll('.tab');
+    const contentSections: NodeListOf<HTMLDivElement> = document.querySelectorAll('.content');
+
+    function handleTabClick(this: HTMLLIElement) {
+        tabElements.forEach(tab => tab.classList.remove('active'));
+        contentSections.forEach(content => content.classList.remove('active'));
+    
+        this.classList.add('active');
+    
+        const tabId = this.getAttribute('data-tab');
+        if (tabId) {
+            const targetContent = document.getElementById(tabId);
+            if (targetContent) {
+                targetContent.classList.add('active');
+                if (tabId === 'dashboard') { // Adjust this to your actual dashboard tab ID
+                    const groupIdString = localStorage.getItem('currentGroupId');
+                    if (groupIdString) {
+                        loadPayments(parseInt(groupIdString)); // Load payments when the dashboard is activated
+                    }
+                }
+            }
         }
     }
-}
+    tabElements.forEach(tab => {
+        tab.addEventListener('click', handleTabClick);
+    });
 
-function saveGroup(): void {
-    const names = getNames();
-    const groupIdString = localStorage.getItem('currentGroupId');
-    if (groupIdString) {
-        const groupId = parseInt(groupIdString, 10);
+    function getTripName(): void {
+        const inputUitje: HTMLInputElement | null = document.getElementById("uitjeName") as HTMLInputElement;
+        if (inputUitje !== null) {
+            const tripName: string = inputUitje.value.trim();
+            if (tripName) {
+                try {
+                    const newGroup = CreateGroup(tripName);
+                    saveGroupToLocalStorage(newGroup);
+                    localStorage.setItem("myGroupNameKey", tripName);
+
+                    loadNewField();
+                } catch (e) {
+                    console.error("Could not save group name.");
+                }
+            } else {
+                alert("No name entered!");
+            }
+        }
+    }
+
+    function loadPayments(groupId: number) {
+        const groupsString = localStorage.getItem('groups');
+        const groups: Group[] = groupsString ? JSON.parse(groupsString) : [];
+        const group = groups.find(g => g.id === groupId);
+    
+        if (group) {
+            // Convert payment dates back to Date objects
+            group.payments.forEach(payment => {
+                payment.date = new Date(payment.date); // Ensure it's a Date object
+            });
+    
+            renderPaymentSummary(group);
+        } else {
+            console.error("Group not found.");
+        }
+    }
+
+    function saveGroup(): void {
+        const names = getNames();
+        const groupIdString = localStorage.getItem('currentGroupId');
+        if (groupIdString) {
+            const groupId = parseInt(groupIdString, 10);
         
+            const groupsString = localStorage.getItem('groups');
+            const groups: Group[] = groupsString ? JSON.parse(groupsString) : [];
+            const group = groups.find(g => g.id === groupId);
+
+            if (group) {
+                if (group.members.length + names.length >= 2) {
+                    names.forEach(name => addMemberToGroup(groupId, name));
+                    alert("Group has been saved!");
+                } else {
+                    alert("Please ensure the group has at least 2 people!");
+                }
+            }
+        }
+    }
+
+    function loadNewField(): void {
+        window.location.href = "existingTrips.html";
+    }
+
+    // Function to add a payment to the group
+    // Function to add a payment to the group
+    function addPayment(groupId: number, payment: Payment): void {
         const groupsString = localStorage.getItem('groups');
         const groups: Group[] = groupsString ? JSON.parse(groupsString) : [];
         const group = groups.find(g => g.id === groupId);
 
         if (group) {
-            if (group.members.length + names.length >= 2) {
-                names.forEach(name => addMemberToGroup(groupId, name));
-                alert("Group has been saved!");
-            } else {
-                alert("Please ensure the group has at least 2 people!");
+            // Ensure the payments array exists
+            if (!group.payments) {
+                group.payments = []; // Initialize the payments array if it's undefined
+            }
+
+            // Add the new payment to the group's payments array
+            group.payments.push(payment);
+
+            // Save the updated group back to localStorage
+            localStorage.setItem('groups', JSON.stringify(groups));
+
+            // Re-render the payment summary with the updated data
+            renderPaymentSummary(group);
+        } else {
+            console.error("Group not found.");
+        }
+    }
+
+    // Function to render the payment summary
+    function renderPaymentSummary(group: Group) {
+        const paymentsList = document.getElementById('paymentsList');
+        const totalGroup = document.getElementById('totalGroup');
+        if (!paymentsList || !totalGroup) return;
+    
+        // Clear the list before rendering
+        paymentsList.innerHTML = '';
+    
+        let totalAmount = 0;
+        const memberPayments: Record<string, number> = {}; // To track payments by each member
+    
+        group.payments.forEach(payment => {
+            // Ensure payment.date is treated as a Date object
+            const paymentDate = new Date(payment.date);
+            
+            const paymentItem = document.createElement('p');
+            paymentItem.textContent = `${payment.name}: ${formatCurrency(payment.payments)} (${payment.description}) on ${paymentDate.toLocaleDateString()}`;
+            paymentsList.appendChild(paymentItem);
+    
+            totalAmount += payment.payments;
+    
+            // Tally the payment for the member
+            if (!memberPayments[payment.name]) {
+                memberPayments[payment.name] = 0; // Initialize if not already present
+            }
+            memberPayments[payment.name] += payment.payments; // Add to the total for the member
+        });
+    
+        // Display the total for the group
+        totalGroup.textContent = formatCurrency(totalAmount);
+    
+        // Show how much each member paid
+        const payerSummary = document.getElementById('payerName');
+        if (payerSummary) {
+            payerSummary.innerHTML = ''; // Clear previous data
+    
+            for (const [name, amount] of Object.entries(memberPayments)) {
+                const payerItem = document.createElement('p');
+                payerItem.textContent = `${name} paid a total of ${formatCurrency(amount)}`;
+                payerSummary.appendChild(payerItem);
             }
         }
     }
 }
-
-function loadNewField(): void {
-    window.location.href = "existingTrips.html";
-}
+);

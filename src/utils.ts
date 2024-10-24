@@ -1,7 +1,15 @@
+export type Payment = {
+    name: string,
+    date: Date,
+    description: string,
+    payments: number
+}
+
 export type Group = {
     id: number,
     groupName: string,
     members: string[],
+    payments: Payment[]
 }
 
 export function CreateGroup(groupName: string): Group {
@@ -9,6 +17,7 @@ export function CreateGroup(groupName: string): Group {
         id: Date.now(),
         groupName: groupName,
         members: [],
+        payments: []
     };
 
     return newGroup;
@@ -32,4 +41,7 @@ export function addMemberToGroup(groupId: number, memberName: string) {
         group.members.push(memberName);
         localStorage.setItem('groups', JSON.stringify(groups));
     }
+}
+export function formatCurrency(amount: number): string {
+    return new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(amount);
 }
