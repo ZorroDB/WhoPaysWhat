@@ -169,16 +169,17 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderPaymentSummary(group: Group) {
         const paymentsList = document.getElementById('paymentsList');
         const totalGroup = document.getElementById('totalGroup');
-        if (!paymentsList || !totalGroup) return;
+        const participantSummary = document.getElementById('payerName');
+        if (!paymentsList || !totalGroup || !participantSummary) return;
     
-        // Clear the list before rendering
         paymentsList.innerHTML = '';
+        participantSummary.innerHTML = '';
     
         let totalAmount = 0;
         const memberPayments: Record<string, number> = {}; // To track payments by each member
     
+        // Calculate total payments for each member
         group.payments.forEach(payment => {
-            // Ensure payment.date is treated as a Date object
             const paymentDate = new Date(payment.date);
             
             const paymentItem = document.createElement('p');
@@ -187,26 +188,30 @@ document.addEventListener("DOMContentLoaded", () => {
     
             totalAmount += payment.payments;
     
-            // Tally the payment for the member
+            // Initialize the member's payment record if it doesn't exist
             if (!memberPayments[payment.name]) {
-                memberPayments[payment.name] = 0; // Initialize if not already present
+                memberPayments[payment.name] = 0;
             }
-            memberPayments[payment.name] += payment.payments; // Add to the total for the member
+            memberPayments[payment.name] += payment.payments; // Sum payments for each member
         });
     
         // Display the total for the group
         totalGroup.textContent = formatCurrency(totalAmount);
     
-        // Show how much each member paid
-        const payerSummary = document.getElementById('payerName');
-        if (payerSummary) {
-            payerSummary.innerHTML = ''; // Clear previous data
+        // Calculate individual balances
+        const numberOfMembers = group.members.length; // Get the number of members
+        const sharePerMember = totalAmount / numberOfMembers; // Calculate share per member
     
-            for (const [name, amount] of Object.entries(memberPayments)) {
-                const payerItem = document.createElement('p');
-                payerItem.textContent = `${name} paid a total of ${formatCurrency(amount)}`;
-                payerSummary.appendChild(payerItem);
-            }
+        for (const member of group.members) {
+            const amountPaid = memberPayments[member] || 0;
+            const balance = sharePerMember - amountPaid; // Positive if owed, negative if needs to pay
+    
+            // Format the output for each member
+            const balanceText = `${member}: Paid ${formatCurrency(amountPaid)} | ${balance >= 0 ? 'Owes' : 'Gets back'} ${formatCurrency(Math.abs(balance))}`;
+            
+            const balanceItem = document.createElement('p');
+            balanceItem.textContent = balanceText;
+            participantSummary.appendChild(balanceItem);
         }
     }
 }
