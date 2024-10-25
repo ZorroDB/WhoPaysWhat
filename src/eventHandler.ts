@@ -22,26 +22,33 @@ document.addEventListener("DOMContentLoaded", () => {
         loadPayments(parseInt(groupId));
 
         const paymentForm = document.getElementById('paymentForm') as HTMLFormElement;
-
+    
         if (paymentForm) {
             paymentForm.addEventListener('submit', function (event) {
                 event.preventDefault();
-
+    
                 const payerSelect = document.getElementById('peopleInGroup') as HTMLSelectElement;
                 const dateInput = document.getElementById('date') as HTMLInputElement;
                 const descriptionInput = document.getElementById('description') as HTMLInputElement;
                 const amountInput = document.getElementById('amount') as HTMLInputElement;
-
+    
+                const amount = parseFloat(amountInput.value);
+                
+                if (isNaN(amount)) {
+                    alert('Please enter a valid number');
+                    return;
+                }
+    
                 const groupId = localStorage.getItem('currentGroupId');
                 if (!groupId) return;
-
+    
                 const payment: Payment = {
                     name: payerSelect.value,
                     date: new Date(dateInput.value),
                     description: descriptionInput.value,
-                    payments: parseFloat(amountInput.value)
+                    payments: amount 
                 };
-
+    
                 addPayment(parseInt(groupId), payment);
                 paymentForm.reset();
             });
@@ -64,10 +71,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const targetContent = document.getElementById(tabId);
             if (targetContent) {
                 targetContent.classList.add('active');
-                if (tabId === 'dashboard') { // Adjust this to your actual dashboard tab ID
+                if (tabId === 'dashboard') {
                     const groupIdString = localStorage.getItem('currentGroupId');
                     if (groupIdString) {
-                        loadPayments(parseInt(groupIdString)); // Load payments when the dashboard is activated
+                        loadPayments(parseInt(groupIdString));
                     }
                 }
             }
@@ -103,9 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const group = groups.find(g => g.id === groupId);
     
         if (group) {
-            // Convert payment dates back to Date objects
             group.payments.forEach(payment => {
-                payment.date = new Date(payment.date); // Ensure it's a Date object
+                payment.date = new Date(payment.date);
             });
     
             renderPaymentSummary(group);
@@ -139,33 +145,26 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "existingTrips.html";
     }
 
-    // Function to add a payment to the group
-    // Function to add a payment to the group
     function addPayment(groupId: number, payment: Payment): void {
         const groupsString = localStorage.getItem('groups');
         const groups: Group[] = groupsString ? JSON.parse(groupsString) : [];
         const group = groups.find(g => g.id === groupId);
 
         if (group) {
-            // Ensure the payments array exists
             if (!group.payments) {
-                group.payments = []; // Initialize the payments array if it's undefined
+                group.payments = [];
             }
 
-            // Add the new payment to the group's payments array
             group.payments.push(payment);
 
-            // Save the updated group back to localStorage
             localStorage.setItem('groups', JSON.stringify(groups));
 
-            // Re-render the payment summary with the updated data
             renderPaymentSummary(group);
         } else {
             console.error("Group not found.");
         }
     }
 
-    // Function to render the payment summary
     function renderPaymentSummary(group: Group) {
         const paymentsList = document.getElementById('paymentsList');
         const totalGroup = document.getElementById('totalGroup');
@@ -176,9 +175,8 @@ document.addEventListener("DOMContentLoaded", () => {
         participantSummary.innerHTML = '';
     
         let totalAmount = 0;
-        const memberPayments: Record<string, number> = {}; // To track payments by each member
+        const memberPayments: Record<string, number> = {};
     
-        // Calculate total payments for each member
         group.payments.forEach(payment => {
             const paymentDate = new Date(payment.date);
             
@@ -188,25 +186,20 @@ document.addEventListener("DOMContentLoaded", () => {
     
             totalAmount += payment.payments;
     
-            // Initialize the member's payment record if it doesn't exist
             if (!memberPayments[payment.name]) {
                 memberPayments[payment.name] = 0;
             }
-            memberPayments[payment.name] += payment.payments; // Sum payments for each member
+            memberPayments[payment.name] += payment.payments;
         });
     
-        // Display the total for the group
         totalGroup.textContent = formatCurrency(totalAmount);
     
-        // Calculate individual balances
-        const numberOfMembers = group.members.length; // Get the number of members
-        const sharePerMember = totalAmount / numberOfMembers; // Calculate share per member
+        const numberOfMembers = group.members.length;
+        const sharePerMember = totalAmount / numberOfMembers;
     
         for (const member of group.members) {
             const amountPaid = memberPayments[member] || 0;
-            const balance = sharePerMember - amountPaid; // Positive if owed, negative if needs to pay
-    
-            // Format the output for each member
+            const balance = sharePerMember - amountPaid;
             const balanceText = `${member}: Paid ${formatCurrency(amountPaid)} | ${balance >= 0 ? 'Owes' : 'Gets back'} ${formatCurrency(Math.abs(balance))}`;
             
             const balanceItem = document.createElement('p');
